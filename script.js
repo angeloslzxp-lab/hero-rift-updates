@@ -2,7 +2,7 @@ const CONFIG={
   api:"https://hero-rift-online.angeloslzxp.workers.dev",
   manifest:"/v1/update/manifest",
   package:"/v1/update/package?key=",
-  releases:"https://github.com/angeloslzxp-lab/hero-rift-updates/releases/latest"
+  launcher:"https://github.com/angeloslzxp-lab/hero-rift-updates/releases/latest/download/HeroRift-Launcher.zip",\n  rankings:"https://hero-rift-online.angeloslzxp.workers.dev/v1/rankings?type=level&limit=10"
 };
 
 const classes={
@@ -12,7 +12,7 @@ const classes={
   arqueiro:{name:"Arqueiro",role:"Precisão · Agilidade · Crítico",description:"Ataque antes de ser alcançado. O Arqueiro combina disparos múltiplos, armadilhas e mobilidade para dominar qualquer distância.",skills:["Rajada tripla","Salto evasivo","Chuva de flechas"],emblem:"ᛏ",weapon:"➳",stats:[85,68,98]}
 };
 
-const ranking=[
+let ranking=[
   {name:"Ashen",class:"Bárbaro",level:42,power:18420,time:"38h 12m",icon:"ᚦ"},
   {name:"Nyxara",class:"Necromante",level:40,power:17980,time:"36h 48m",icon:"ᛟ"},
   {name:"Vhalor",class:"Mago",level:39,power:17210,time:"34h 05m",icon:"ᛉ"},
@@ -93,28 +93,55 @@ renderRank();
 document.querySelector("#rankSearch").addEventListener("input",renderRank);
 document.querySelector("#rankClass").addEventListener("change",renderRank);
 
-async function setupDownload(){
+function normalizeClass(value){
+  const key=String(value||"").toLowerCase();
+  if(key.includes("barb"))return "Bárbaro";
+  if(key.includes("mage")||key.includes("mago"))return "Mago";
+  if(key.includes("necro"))return "Necromante";
+  if(key.includes("arch")||key.includes("arque"))return "Arqueiro";
+  return value||"Aventureiro";
+}
+function classIcon(value){
+  return {"Bárbaro":"ᚦ","Mago":"ᛉ","Necromante":"ᛟ","Arqueiro":"ᛏ"}[value]||"◆";
+}
+async function loadRanking(){
+  const status=document.querySelector(".rank-status span");
+  const detail=document.querySelector(".rank-status small");
+  try{
+    const response=await fetch(CONFIG.rankings,{headers:{Accept:"application/json"},cache:"no-store"});
+    if(!response.ok)throw new Error("ranking");
+    const payload=await response.json();
+    const rows=Array.isArray(payload)?payload:(payload.rankings||payload.players||payload.data||payload.results||[]);
+    if(!Array.isArray(rows))throw new Error("formato");
+    ranking=rows.map((item,index)=>{
+      const className=normalizeClass(item.class_name||item.class||item.character_class||item.hero_class);
+      return {
+        name:item.character_name||item.player_name||item.username||item.name||("Herói "+(index+1)),
+        class:className,
+        level:Number(item.level||item.character_level||0),
+        power:Number(item.power||item.combat_power||item.score||item.xp||0),
+        time:item.play_time||item.playtime||item.time_played||"—",
+        icon:classIcon(className)
+      };
+    });
+    status.innerHTML="<i></i> Ranking online";
+    detail.textContent="Dados oficiais · Top 10 por nível";
+  }catch(error){
+    status.innerHTML="<i></i> Ranking temporariamente offline";
+    detail.textContent="Exibindo uma prévia até a API responder";
+  }
+  renderRank();
+}
+function setupDownload(){
   const button=document.querySelector("#downloadButton");
   const version=document.querySelector("#downloadVersion");
   const note=document.querySelector("#downloadNote");
-  try{
-    const response=await fetch(CONFIG.api+CONFIG.manifest,{headers:{Accept:"application/json"}});
-    if(!response.ok)throw new Error("manifest");
-    const data=await response.json();
-    const current=data.version||data.latest_version||data.latestVersion||"mais recente";
-    const key=data.key||data.package_key||data.packageKey||data.file_key||data.fileKey;
-    version.textContent="VERSÃO "+current;
-    if(key)button.href=CONFIG.api+CONFIG.package+encodeURIComponent(key);
-    else if(data.download_url||data.downloadUrl)button.href=data.download_url||data.downloadUrl;
-    else button.href=CONFIG.releases;
-    note.textContent="Launcher oficial · versão "+current;
-  }catch(error){
-    button.href=CONFIG.releases;
-    version.textContent="DOWNLOAD OFICIAL";
-    note.textContent="A versão mais recente será exibida na página de downloads.";
-  }
+  button.href=CONFIG.launcher;
+  version.textContent="LAUNCHER OFICIAL";
+  note.textContent="Download direto · atualizações automáticas incluídas";
 }
 setupDownload();
+loadRanking();
 
 const canvas=document.querySelector("#embers");
 const ctx=canvas.getContext("2d");
