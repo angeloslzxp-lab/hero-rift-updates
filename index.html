@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07080b">
+  <meta name="description" content="Hero Rift — RPG de ação dark fantasy com combate intenso, classes únicas, loot e progressão por atos.">
+  <meta property="og:title" content="Hero Rift — Entre na Fenda">
+  <meta property="og:description" content="Escolha sua classe, conquiste relíquias e atravesse os cinco atos de um mundo consumido pela Fenda.">
+  <title>Hero Rift — Site Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="inicio">
+    <a class="brand" href="#inicio" aria-label="Hero Rift, início">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 3 52 15l-7 35-13 11-13-11-7-35L32 3Z"/>
+        <path class="brand-rift" d="m35 9-8 17 8 2-9 26 15-30-9-2 3-13Z"/>
+      </svg>
+      <span><b>HERO</b><em>RIFT</em></span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="active" href="#inicio">Início</a>
+      <a href="#sobre">O jogo</a>
+      <a href="#classes">Classes</a>
+      <a href="#progressao">Progressão</a>
+      <a href="#ranking">Ranking</a>
+      <a class="nav-download" href="#download">Baixar agora</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+      <div class="hero-sigil" aria-hidden="true">
+        <svg viewBox="0 0 600 600">
+          <circle cx="300" cy="300" r="220"/>
+          <circle cx="300" cy="300" r="174"/>
+          <path d="M300 62 356 196 503 188 390 282 444 420 300 340 156 420 210 282 97 188 244 196Z"/>
+          <path d="m318 123-79 166 86 19-66 169 128-210-83-19 14-125Z"/>
+        </svg>
+      </div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> Uma fenda. Quatro destinos.</p>
+        <h1>O mundo caiu.<br><strong>Os heróis se ergueram.</strong></h1>
+        <p class="hero-lead">Enfrente hordas, domine habilidades devastadoras e conquiste relíquias em um RPG de ação dark fantasy construído para recompensar cada batalha.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#download">
+            <span class="btn-icon">↓</span>
+            <span><small>JOGUE AGORA</small>Download gratuito</span>
+          </a>
+          <a class="btn btn-ghost" href="#sobre">
+            <span class="play-icon">▶</span>
+            Conhecer o jogo
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span><i class="status-dot"></i> Servidores online</span>
+          <span>Windows 64-bit</span>
+          <span>Atualizações automáticas</span>
+        </div>
+      </div>
+
+      <div class="hero-figure reveal" aria-label="Guerreiro diante da Fenda">
+        <div class="rift-glow"></div>
+        <svg viewBox="0 0 440 620" role="img">
+          <defs>
+            <linearGradient id="armor" x1="0" x2="1"><stop stop-color="#11151a"/><stop offset=".5" stop-color="#30343a"/><stop offset="1" stop-color="#090b0e"/></linearGradient>
+            <linearGradient id="blade" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#15191e"/><stop offset=".55" stop-color="#b4bac0"/><stop offset=".75" stop-color="#fff"/><stop offset="1" stop-color="#2b3036"/></linearGradient>
+            <filter id="fire"><feGaussianBlur stdDeviation="7"/></filter>
+          </defs>
+          <path class="figure-aura" d="M245 38c88 38 120 171 87 271 61 91 39 221-32 279H105c-39-90-42-203 20-284-22-95 18-212 120-266Z"/>
+          <path fill="#08090b" d="m186 178-48 63-29 140 34 163h175l20-155-32-156-51-55-69 0Z"/>
+          <path fill="url(#armor)" stroke="#616971" stroke-width="3" d="m162 231 42-45 70 4 42 56-29 81-98 4-40-69 13-31Z"/>
+          <path fill="#0b0d10" stroke="#525961" stroke-width="4" d="m190 172 17-61 60-6 20 68-30 40-42-2-25-39Z"/>
+          <path fill="#d75c2a" d="m208 153 15-19 32 1 15 19-10 35-39 1-13-37Z"/>
+          <path fill="#f0b35c" d="m220 151 11-8 20 2 8 9-8 6-24-1-7-8Z"/>
+          <path fill="url(#armor)" stroke="#58616a" stroke-width="4" d="m145 250-47 48 19 91 44-13 22-96-38-30Zm174 3 45 61-25 76-42-18-17-91 39-28Z"/>
+          <path fill="#15191d" stroke="#4d555d" stroke-width="4" d="m178 322-35 67 9 151 53 3 19-147-46-74Zm105 2 35 68-17 151-52-2-14-146 48-71Z"/>
+          <path fill="#0b0d0f" stroke="#3d444a" stroke-width="3" d="m151 509-24 73 83 0-5-41-54-32Zm148 1-4 33-5 39h82l-20-65-53-7Z"/>
+          <path fill="url(#blade)" stroke="#d7d8d8" stroke-width="2" d="m352 77 27 15-132 337-24 2 4-26L352 77Z"/>
+          <path fill="#64231a" stroke="#cf6a38" stroke-width="3" d="m212 405 61 25-8 19-61-26 8-18Z"/>
+          <path fill="#1b1e22" stroke="#7a8085" stroke-width="3" d="m210 421 44 18-7 35-44-20 7-33Z"/>
+          <g fill="#d65b27" filter="url(#fire)" opacity=".85">
+            <circle cx="218" cy="158" r="17"/><circle cx="327" cy="142" r="10"/><circle cx="374" cy="220" r="14"/>
+          </g>
+        </svg>
+        <div class="figure-caption"><span>01</span><p>O Guardião<br><b>da última chama</b></p></div>
+      </div>
+
+      <a class="scroll-cue" href="#sobre"><span></span>Descubra a Fenda</a>
+    </section>
+
+    <section class="world section" id="sobre">
+      <div class="section-kicker">O mundo de Hero Rift</div>
+      <div class="split-heading reveal">
+        <h2>A Fenda mudou<br><em>todas as regras.</em></h2>
+        <p>As fronteiras entre reinos ruíram. Agora, cada expedição transforma o mapa, os inimigos e as recompensas. Entre sozinho ou prepare seu herói para a próxima ameaça.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <span class="feature-number">01</span>
+          <div class="rune-icon">◈</div>
+          <h3>Combate visceral</h3>
+          <p>Movimento preciso, ataques evolutivos e habilidades que mudam visualmente conforme ficam mais poderosas.</p>
+          <span class="card-line"></span>
+        </article>
+        <article class="feature-card reveal">
+          <span class="feature-number">02</span>
+          <div class="rune-icon">⌁</div>
+          <h3>Loot que importa</h3>
+          <p>Armas, armaduras e relíquias com raridades distintas, requisitos de classe e atributos que definem sua build.</p>
+          <span class="card-line"></span>
+        </article>
+        <article class="feature-card reveal">
+          <span class="feature-number">03</span>
+          <div class="rune-icon">⬡</div>
+          <h3>Mundo em atos</h3>
+          <p>Cinco atos, cinquenta estágios, cidades, mapas progressivos e chefes únicos esperando no fim de cada jornada.</p>
+          <span class="card-line"></span>
+        </article>
+        <article class="feature-card reveal">
+          <span class="feature-number">04</span>
+          <div class="rune-icon">✦</div>
+          <h3>Seu herói, suas regras</h3>
+          <p>Distribua pontos de atributo e habilidade. Salve vários personagens e crie estilos de jogo diferentes.</p>
+          <span class="card-line"></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="classes section" id="classes">
+      <div class="section-kicker centered">Escolha seu destino</div>
+      <h2 class="section-title reveal">Quatro caminhos. <em>Uma lenda.</em></h2>
+      <p class="section-intro">Cada classe possui ataques, recursos e árvores de habilidade próprias.</p>
+
+      <div class="class-selector reveal" role="tablist" aria-label="Classes">
+        <button class="class-tab active" data-class="barbaro" role="tab"><span>01</span>Bárbaro</button>
+        <button class="class-tab" data-class="mago" role="tab"><span>02</span>Mago</button>
+        <button class="class-tab" data-class="necromante" role="tab"><span>03</span>Necromante</button>
+        <button class="class-tab" data-class="arqueiro" role="tab"><span>04</span>Arqueiro</button>
+      </div>
+
+      <div class="class-stage reveal">
+        <div class="class-art" aria-hidden="true">
+          <div class="class-emblem" id="classEmblem">ᚦ</div>
+          <div class="class-weapon" id="classWeapon">⚔</div>
+        </div>
+        <div class="class-info">
+          <p class="class-role" id="classRole">Força · Fúria · Impacto</p>
+          <h3 id="className">Bárbaro</h3>
+          <p id="classDescription">Avance sem medo e transforme cada golpe em uma onda de destruição. O Bárbaro domina o combate próximo e fica mais perigoso quando cercado.</p>
+          <div class="skill-list" id="classSkills">
+            <span><i>◆</i> Ruptura</span><span><i>◆</i> Salto brutal</span><span><i>◆</i> Fúria ancestral</span>
+          </div>
+          <div class="stat-row">
+            <div><span>Poder</span><b><i id="statPower" style="width:94%"></i></b></div>
+            <div><span>Controle</span><b><i id="statControl" style="width:58%"></i></b></div>
+            <div><span>Mobilidade</span><b><i id="statMobility" style="width:70%"></i></b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="progression section" id="progressao">
+      <div class="progress-copy reveal">
+        <div class="section-kicker">Forje sua jornada</div>
+        <h2>Quanto mais fundo,<br><em>maior a recompensa.</em></h2>
+        <p>Cada ato abre novos mapas, inimigos e equipamentos. Estágios concluídos permanecem disponíveis para você aprimorar sua build antes do próximo desafio.</p>
+        <ul class="check-list">
+          <li><span>✓</span> Pontos de atributo a cada nível</li>
+          <li><span>✓</span> Árvore de habilidades por classe</li>
+          <li><span>✓</span> Equipamentos comuns até lendários</li>
+          <li><span>✓</span> Banco compartilhado e mercadores</li>
+        </ul>
+      </div>
+
+      <div class="acts reveal">
+        <div class="act active"><span>I</span><div><b>Terras Esquecidas</b><small>Níveis 1–10 · O despertar</small></div><i>10</i></div>
+        <div class="act"><span>II</span><div><b>Floresta Corrompida</b><small>Níveis 11–20 · Raízes antigas</small></div><i>20</i></div>
+        <div class="act"><span>III</span><div><b>Deserto das Cinzas</b><small>Níveis 21–30 · O sol negro</small></div><i>30</i></div>
+        <div class="act"><span>IV</span><div><b>Fortaleza Abissal</b><small>Níveis 31–40 · Portões selados</small></div><i>40</i></div>
+        <div class="act"><span>V</span><div><b>Coração da Fenda</b><small>Níveis 41–50 · O confronto final</small></div><i>50</i></div>
+      </div>
+    </section>
+
+    <section class="ranking section" id="ranking">
+      <div class="rank-heading reveal">
+        <div>
+          <div class="section-kicker">Salão dos campeões</div>
+          <h2>As lendas da <em>temporada.</em></h2>
+        </div>
+        <div class="rank-controls">
+          <label><span class="sr-only">Pesquisar jogador</span><input id="rankSearch" type="search" placeholder="Pesquisar herói..."></label>
+          <select id="rankClass" aria-label="Filtrar por classe">
+            <option value="all">Todas as classes</option>
+            <option value="Bárbaro">Bárbaro</option>
+            <option value="Mago">Mago</option>
+            <option value="Necromante">Necromante</option>
+            <option value="Arqueiro">Arqueiro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rank-board reveal">
+        <div class="rank-status"><span><i></i> Pré-temporada</span><small>Atualização automática quando o ranking online estiver disponível</small></div>
+        <div class="rank-table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Herói</th><th>Classe</th><th>Nível</th><th>Poder</th><th>Tempo</th></tr></thead>
+            <tbody id="rankBody"></tbody>
+          </table>
+        </div>
+        <p class="empty-rank" id="emptyRank" hidden>Nenhum herói encontrado.</p>
+      </div>
+    </section>
+
+    <section class="download section" id="download">
+      <div class="download-rune" aria-hidden="true">ᛟ</div>
+      <div class="download-content reveal">
+        <div class="section-kicker centered">Seu destino aguarda</div>
+        <h2>Entre na Fenda.</h2>
+        <p>Baixe o launcher oficial. Ele verifica sua versão e instala automaticamente as próximas atualizações.</p>
+        <a class="btn btn-primary btn-download-main" id="downloadButton" href="https://github.com/angeloslzxp-lab/hero-rift-updates/releases/latest" target="_blank" rel="noopener">
+          <span class="btn-icon">↓</span>
+          <span><small id="downloadVersion">VERSÃO MAIS RECENTE</small><b>Baixar para Windows</b></span>
+        </a>
+        <div class="requirements">
+          <span>Windows 10/11 64-bit</span><i></i><span>Conexão com internet</span><i></i><span>Atualização automática</span>
+        </div>
+        <p class="download-note" id="downloadNote">Consultando servidor de atualizações...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#inicio">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3 52 15l-7 35-13 11-13-11-7-35L32 3Z"/><path class="brand-rift" d="m35 9-8 17 8 2-9 26 15-30-9-2 3-13Z"/></svg>
+      <span><b>HERO</b><em>RIFT</em></span>
+    </a>
+    <p>Um RPG de ação dark fantasy independente.</p>
+    <div class="footer-links"><a href="#sobre">O jogo</a><a href="#classes">Classes</a><a href="#ranking">Ranking</a><a href="#download">Download</a></div>
+    <small>© <span id="year"></span> Hero Rift. Todos os direitos reservados.</small>
+  </footer>
+</body>
+</html>
