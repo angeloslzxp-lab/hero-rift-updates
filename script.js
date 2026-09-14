@@ -12,14 +12,7 @@ const classes={
   arqueiro:{name:"Arqueiro",role:"Precisão · Agilidade · Crítico",description:"Ataque antes de ser alcançado. O Arqueiro combina disparos múltiplos, armadilhas e mobilidade para dominar qualquer distância.",skills:["Rajada tripla","Salto evasivo","Chuva de flechas"],emblem:"ᛏ",weapon:"➳",stats:[85,68,98]}
 };
 
-let ranking=[
-  {name:"Ashen",class:"Bárbaro",level:42,power:18420,time:"38h 12m",icon:"ᚦ"},
-  {name:"Nyxara",class:"Necromante",level:40,power:17980,time:"36h 48m",icon:"ᛟ"},
-  {name:"Vhalor",class:"Mago",level:39,power:17210,time:"34h 05m",icon:"ᛉ"},
-  {name:"Elyndra",class:"Arqueiro",level:37,power:16670,time:"31h 44m",icon:"ᛏ"},
-  {name:"Dravenor",class:"Bárbaro",level:35,power:15890,time:"29h 20m",icon:"ᚦ"},
-  {name:"Morrigan",class:"Mago",level:33,power:14950,time:"27h 13m",icon:"ᛉ"}
-];
+let ranking=[];
 
 document.querySelector("#year").textContent=new Date().getFullYear();
 
@@ -111,7 +104,7 @@ async function loadRanking(){
     const response=await fetch(CONFIG.rankings,{headers:{Accept:"application/json"},cache:"no-store"});
     if(!response.ok)throw new Error("ranking");
     const payload=await response.json();
-    const rows=Array.isArray(payload)?payload:(payload.rankings||payload.players||payload.data||payload.results||[]);
+    const rows=Array.isArray(payload)?payload:(payload.rankings||payload.leaderboard||payload.players||payload.data||payload.results||[]);
     if(!Array.isArray(rows))throw new Error("formato");
     ranking=rows.map((item,index)=>{
       const className=normalizeClass(item.class_name||item.class||item.character_class||item.hero_class);
