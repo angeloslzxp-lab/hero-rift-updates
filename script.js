@@ -7,10 +7,10 @@ const CONFIG={
 };
 
 const classes={
-  barbaro:{name:"Bárbaro",role:"Força · Fúria · Impacto",description:"Avance sem medo e transforme cada golpe em uma onda de destruição. O Bárbaro domina o combate próximo e fica mais perigoso quando cercado.",skills:["Ruptura","Salto brutal","Fúria ancestral"],emblem:"ᚦ",weapon:"⚔",stats:[94,58,70]},
-  mago:{name:"Mago",role:"Arcano · Controle · Explosão",description:"Dobre os elementos e controle o campo de batalha à distância. O Mago combina ataques poderosos com barreiras e efeitos em grandes áreas.",skills:["Orbe arcano","Nova glacial","Tempestade astral"],emblem:"ᛉ",weapon:"✦",stats:[88,93,55]},
-  necromante:{name:"Necromante",role:"Invocação · Maldição · Drenagem",description:"Comande criaturas da Fenda e desgaste seus inimigos com magia sombria. Cada servo transforma o campo em um exército particular.",skills:["Erguer servo","Lança sombria","Exército profano"],emblem:"ᛟ",weapon:"☠",stats:[79,96,47]},
-  arqueiro:{name:"Arqueiro",role:"Precisão · Agilidade · Crítico",description:"Ataque antes de ser alcançado. O Arqueiro combina disparos múltiplos, armadilhas e mobilidade para dominar qualquer distância.",skills:["Rajada tripla","Salto evasivo","Chuva de flechas"],emblem:"ᛏ",weapon:"➳",stats:[85,68,98]}
+  barbaro:{name:"Bárbaro",role:"Força · Fúria · Impacto",description:"Avance sem medo e transforme cada golpe em uma onda de destruição. O Bárbaro domina o combate próximo e fica mais perigoso quando cercado.",skills:["Ruptura","Salto brutal","Fúria ancestral"],image:"assets/class-barbaro.webp",stats:[94,58,70]},
+  mago:{name:"Mago",role:"Arcano · Controle · Explosão",description:"Dobre os elementos e controle o campo de batalha à distância. O Mago combina ataques poderosos com barreiras e efeitos em grandes áreas.",skills:["Orbe arcano","Nova glacial","Tempestade astral"],image:"assets/class-mago.webp",stats:[88,93,55]},
+  necromante:{name:"Necromante",role:"Invocação · Maldição · Drenagem",description:"Comande criaturas da Fenda e desgaste seus inimigos com magia sombria. Cada servo transforma o campo em um exército particular.",skills:["Erguer servo","Lança sombria","Exército profano"],image:"assets/class-necromante.webp",stats:[79,96,47]},
+  arqueiro:{name:"Arqueiro",role:"Precisão · Agilidade · Crítico",description:"Ataque antes de ser alcançado. O Arqueiro combina disparos múltiplos, armadilhas e mobilidade para dominar qualquer distância.",skills:["Rajada tripla","Salto evasivo","Chuva de flechas"],image:"assets/class-arqueiro.webp",stats:[85,68,98]}
 };
 
 let ranking=[];
@@ -55,19 +55,20 @@ document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 const classEls={
   role:document.querySelector("#classRole"),name:document.querySelector("#className"),
   description:document.querySelector("#classDescription"),skills:document.querySelector("#classSkills"),
-  emblem:document.querySelector("#classEmblem"),weapon:document.querySelector("#classWeapon"),
+  portrait:document.querySelector("#classPortrait"),artName:document.querySelector("#classArtName"),
   stats:[document.querySelector("#statPower"),document.querySelector("#statControl"),document.querySelector("#statMobility")]
 };
 document.querySelectorAll(".class-tab").forEach(tab=>tab.addEventListener("click",()=>{
   document.querySelectorAll(".class-tab").forEach(t=>t.classList.toggle("active",t===tab));
   const data=classes[tab.dataset.class];
-  classEls.weapon.style.transform="scale(.75) rotate(-8deg)";
+  classEls.portrait.style.opacity="0";
+  classEls.portrait.style.transform="scale(1.04)";
   setTimeout(()=>{
     classEls.role.textContent=data.role;classEls.name.textContent=data.name;classEls.description.textContent=data.description;
-    classEls.emblem.textContent=data.emblem;classEls.weapon.textContent=data.weapon;
+    classEls.portrait.src=data.image;classEls.portrait.alt=data.name+" de Hero Rift";classEls.artName.textContent=data.name.toUpperCase();
     classEls.skills.innerHTML=data.skills.map(s=>"<span><i>◆</i> "+s+"</span>").join("");
     classEls.stats.forEach((el,i)=>el.style.width=data.stats[i]+"%");
-    classEls.weapon.style.transform="";
+    classEls.portrait.style.opacity="1";classEls.portrait.style.transform="";
   },170);
 }));
 
