@@ -2,7 +2,8 @@ const CONFIG={
   api:"https://hero-rift-online.angeloslzxp.workers.dev",
   manifest:"/v1/update/manifest",
   package:"/v1/update/package?key=",
-  launcher:"https://github.com/angeloslzxp-lab/hero-rift-updates/releases/latest/download/HeroRift-Launcher.zip",\n  rankings:"https://hero-rift-online.angeloslzxp.workers.dev/v1/rankings?type=level&limit=10"
+  launcher:"https://github.com/angeloslzxp-lab/hero-rift-updates/releases/latest/download/HeroRift-Launcher.zip",
+  rankings:"https://hero-rift-online.angeloslzxp.workers.dev/v1/rankings?type=level&limit=10"
 };
 
 const classes={
